@@ -1,0 +1,29 @@
+<p-table [value]="contattoSelezionato ? [contattoSelezionato] : []" styleClass="p-datatable-striped" [tableStyle]="{ 'min-width': '50rem' }">
+  <ng-template pTemplate="header">
+    <tr>
+      <th>Nome</th>
+      <th>Cognome</th>
+      <th>Email</th>
+      <th class="text-center">Azioni</th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-contatto>
+    <tr>
+      <td>
+        <input type="text" name="nome" pInputText [(ngModel)]="contatto.nome" class="full-radius" />
+      </td>
+      <td>
+        <input type="text" name="cognome" pInputText [(ngModel)]="contatto.cognome" class="full-radius" />
+      </td>
+      <td>
+        <input type="text" name="email" pInputText [(ngModel)]="contatto.email" class="full-radius" />
+      </td>
+      <td class="text-end align-right">
+        <p-button class="edit-btn" icon="pi pi-save" styleClass="p-button-success p-button-rounded" (click)="salvaContatto(contatto.id)"></p-button>
+        <p-button icon="pi pi-times" styleClass="p-button-danger p-button-rounded"
+          (click)="eliminaContatto(contatto.id)"
+          ></p-button>
+      </td>
+    </tr>
+  </ng-template>
+</p-table>

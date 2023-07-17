@@ -1,0 +1,21 @@
+<p-table [value]="contattiFiltrati || contatti" styleClass="p-datatable-striped" [tableStyle]="{ 'min-width': '50rem' }">
+  <ng-template pTemplate="header">
+    <tr>
+      <th>Nome</th>
+      <th>Cognome</th>
+      <th class="text-center">Azioni</th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-contatto>
+    <tr>
+      <td>{{ contatto.nome }}</td>
+      <td>{{ contatto.cognome }}</td>
+      <td class="text-end align-right">
+        <p-button class="edit-btn" icon="pi pi-user-edit" styleClass="p-button-warning p-button-rounded"
+          [routerLink]="['/dettagli', contatto.id]"></p-button>
+        <p-button icon="pi pi-times" styleClass="p-button-danger p-button-rounded"
+          (click)="eliminaContatto(contatto.id)"></p-button>
+      </td>
+    </tr>
+  </ng-template>
+</p-table>

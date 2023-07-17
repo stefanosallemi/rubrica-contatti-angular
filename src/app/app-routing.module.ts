@@ -1,0 +1,19 @@
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+import { ListaContattiComponent } from './lista-contatti/lista-contatti.component';
+import { AggiungiContattoComponent } from './aggiungi-contatto/aggiungi-contatto.component';
+import { DettagliContattoComponent } from './dettagli-contatto/dettagli-contatto.component';
+
+const routes: Routes = [
+  { path: '', redirectTo: '/contatti', pathMatch: 'full' },
+  { path: 'contatti', component: ListaContattiComponent },
+  { path: 'aggiungi', component: AggiungiContattoComponent },
+  { path: 'dettagli/:id', component: DettagliContattoComponent },
+  { path: '**', redirectTo: '/contatti' },
+];
+
+@NgModule({
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule]
+})
+export class AppRoutingModule { }

@@ -1,0 +1,20 @@
+<div class="container">
+  <p-card class="card-content">
+    <div class="center-text">
+      <h1>Rubrica Contatti </h1>
+    </div>
+    <div class="navbar">
+      <p-button styleClass="p-button-rounded" routerLink="/">Contatti</p-button>
+
+      <p-toggleButton styleClass="p-button-rounded" (click)="ordinaContattiPerNome()" [(ngModel)]="checked"
+        onLabel="Ordina" offLabel="Ordina" onIcon="pi pi-sort-alpha-down" offIcon="pi pi-sort-alpha-up"></p-toggleButton>
+
+      <!-- Add the app-ricerca component here -->
+      <app-ricerca></app-ricerca>
+
+      <p-button type="ngSubmit" styleClass="p-button-rounded p-button-success" label="Nuovo Contatto"
+        icon="pi pi-user-plus" routerLink="/aggiungi"></p-button>
+    </div>
+    <router-outlet></router-outlet>
+  </p-card>
+</div>
