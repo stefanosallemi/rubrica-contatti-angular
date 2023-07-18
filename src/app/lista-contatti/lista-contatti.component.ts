@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Contatto } from '../models/contatto.model';
 import { ContattiService } from '../services/contatti.service';
 import { ActivatedRoute } from '@angular/router';
-import { EliminaConfermaService } from '../services/elimina-conferma.service';
 
 @Component({
   selector: 'app-lista-contatti',
@@ -16,27 +15,25 @@ export class ListaContattiComponent implements OnInit {
   constructor(
     private contattiService: ContattiService,
     private route: ActivatedRoute,
-    private eliminaConfermaService: EliminaConfermaService
   ) { }
 
   ngOnInit() {
     this.caricaContatti();
 
-    this.eliminaConfermaService.confermaEliminazione$.subscribe(confermato => {
+    /* this.contattiService.confermaEliminazione$.subscribe(confermato => {
       if (confermato) {
         if (this.idContattoInEliminazione) {
           this.eliminaContatto(this.idContattoInEliminazione);
           this.idContattoInEliminazione = null;
         }
       }
-    });
+    }); */
   }
 
   caricaContatti() {
     this.contatti = this.contattiService.ottieniContatti();
 
     const queryParam = this.route.snapshot.queryParamMap.get('query');
-
     if (queryParam) {
       this.contattiFiltrati = this.contatti.filter(contatto =>
         contatto.nome.toLowerCase().includes(queryParam.toLowerCase())
@@ -53,8 +50,8 @@ export class ListaContattiComponent implements OnInit {
 
   idContattoInEliminazione: number | null = null;
 
-  mostraConfermaEliminazione(contatto: Contatto) {
-    this.idContattoInEliminazione = contatto.id;
-    this.eliminaConfermaService.confermaEliminazione(true);
+  mostraConfermaEliminazione() {
+    /* this.idContattoInEliminazione = contatto.id; */
+    /* this.contattiService.confermaEliminazione(true, contatto.id); */
   }
 }

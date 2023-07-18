@@ -1,18 +1,21 @@
-import { Component } from '@angular/core';
-import { ConfirmationService, MessageService, ConfirmEventType } from 'primeng/api';
-import { EliminaConfermaService } from '../services/elimina-conferma.service';
+import { Component, Input } from '@angular/core';
+import { ConfirmationService, ConfirmEventType, MessageService } from 'primeng/api';
+import { Contatto } from '../models/contatto.model';
+import { ContattiService } from '../services/contatti.service';
 
 @Component({
   selector: 'app-elimina-alert',
   templateUrl: './elimina-alert.component.html',
   styleUrls: ['./elimina-alert.component.scss'],
-  providers: [ConfirmationService, MessageService],
 })
 export class EliminaAlertComponent {
+
+  @Input() contatto!: Contatto;
+
   constructor(
     private confirmationService: ConfirmationService,
     private messageService: MessageService,
-    private eliminaConfermaService: EliminaConfermaService
+    private contattiService: ContattiService,
   ) { }
 
   confermaEliminazione() {
@@ -24,7 +27,7 @@ export class EliminaAlertComponent {
           severity: 'info',
           summary: 'Contatto eliminato con successo!',
         });
-        this.eliminaConfermaService.confermaEliminazione(true);
+       /*  this.contattiService.confermaEliminazione(true, contatto.id); */
       },
       reject: (type: ConfirmEventType) => {
         switch (type) {

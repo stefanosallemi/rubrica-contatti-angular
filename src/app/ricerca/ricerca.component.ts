@@ -10,7 +10,7 @@ import { delay } from 'rxjs';
   styleUrls: ['./ricerca.component.scss']
 })
 export class RicercaComponent {
-  query: string;
+  query!: string;
   contattiFiltrati: Contatto[] = [];
 
   constructor(
@@ -23,6 +23,6 @@ export class RicercaComponent {
 
     setTimeout(() => {
       window.location.reload();
-    }, 10);
+    });
   }
 }

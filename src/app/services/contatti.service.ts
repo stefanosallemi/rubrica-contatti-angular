@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Contatto } from '../models/contatto.model';
 import { Router } from '@angular/router';
+import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -16,6 +17,16 @@ export class ContattiService {
     this.contattiFiltrati = this.contatti
     
   }
+  
+  /* private confermaEliminazioneSource = new Subject<boolean>();
+  confermaEliminazione$ = this.confermaEliminazioneSource.asObservable();
+
+  confermaEliminazione(confermato: boolean, id: number): void {
+    if (confermato) {
+      this.eliminaContatto(id);
+    }
+    this.confermaEliminazioneSource.next(confermato);
+  } */
 
   aggiungiContatto(contatto: Contatto): void {
     contatto.id = this.generaNuovoId();
