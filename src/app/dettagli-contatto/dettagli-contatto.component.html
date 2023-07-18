@@ -10,19 +10,38 @@
   <ng-template pTemplate="body" let-contatto>
     <tr>
       <td>
-        <input type="text" name="nome" pInputText [(ngModel)]="contatto.nome" class="full-radius" />
+        <p-cellEditor>
+          <ng-template pTemplate="input">
+            <input type="text" name="nome" pInputText [(ngModel)]="contatto.nome" class="full-radius" />
+          </ng-template>
+          <ng-template pTemplate="output">
+            {{ contatto.nome }}
+          </ng-template>
+        </p-cellEditor>
       </td>
       <td>
-        <input type="text" name="cognome" pInputText [(ngModel)]="contatto.cognome" class="full-radius" />
+        <p-cellEditor>
+          <ng-template pTemplate="input">
+            <input type="text" name="cognome" pInputText [(ngModel)]="contatto.cognome" class="full-radius" />
+          </ng-template>
+          <ng-template pTemplate="output">
+            {{ contatto.cognome }}
+          </ng-template>
+        </p-cellEditor>
       </td>
       <td>
-        <input type="text" name="email" pInputText [(ngModel)]="contatto.email" class="full-radius" />
+        <p-cellEditor>
+          <ng-template pTemplate="input">
+            <input type="text" name="email" pInputText [(ngModel)]="contatto.email" class="full-radius" />
+          </ng-template>
+          <ng-template pTemplate="output">
+            {{ contatto.email }}
+          </ng-template>
+        </p-cellEditor>
       </td>
       <td class="text-end align-right">
         <p-button class="edit-btn" icon="pi pi-save" styleClass="p-button-success p-button-rounded" (click)="salvaContatto(contatto.id)"></p-button>
-        <p-button icon="pi pi-times" styleClass="p-button-danger p-button-rounded"
-          (click)="eliminaContatto(contatto.id)"
-          ></p-button>
+        <app-elimina-alert></app-elimina-alert>
       </td>
     </tr>
   </ng-template>

@@ -1,16 +1,15 @@
 <form #contattoForm="ngForm" (ngSubmit)="salvaContatto()" class="navbar custom-form">
   <span class="p-input-icon-left">
     <i class="pi pi-user"></i>
-    <input class="full-radius" type="text" placeholder="Nome" pInputText [(ngModel)]="contatto.nome" name="nome" required />
+    <input class="full-radius" type="text" placeholder="Nome" pInputText [(ngModel)]="contatto.nome" name="nome" required pattern="[A-Za-z ]*" />
   </span>
   <span class="p-input-icon-left">
     <i class="pi pi-user"></i>
-    <input class="full-radius" type="text" placeholder="Cognome" pInputText [(ngModel)]="contatto.cognome" name="cognome" required />
+    <input class="full-radius" type="text" placeholder="Cognome" pInputText [(ngModel)]="contatto.cognome" name="cognome" required pattern="[A-Za-z ]*" />
   </span>
   <span class="p-input-icon-left">
     <i class="pi pi-send"></i>
-    <input class="full-radius" type="text" placeholder="Email" pInputText [(ngModel)]="contatto.email" name="email" required />
+    <input class="full-radius" type="text" placeholder="Email" pInputText [(ngModel)]="contatto.email" name="email" required pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}" />
   </span>
   <p-button type="ngSubmit" styleClass="p-button-rounded p-button-success" label="Aggiungi" icon="pi pi-user-plus"></p-button>
-<!--   <p-button styleClass="p-button-rounded" type="ngSubmit">Aggiungi Contatto</p-button> -->
 </form>

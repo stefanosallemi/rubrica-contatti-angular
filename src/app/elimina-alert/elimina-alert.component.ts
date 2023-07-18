@@ -25,6 +25,9 @@ export class EliminaAlertComponent {
           detail: 'Contatto eliminato con successo'
         });
         this.contattiService.confermaEliminazione(true);
+        setTimeout(() => {
+          window.location.href = '/contatti';
+        }, 2000);
       },
       reject: (type: ConfirmEventType) => {
         switch (type) {
