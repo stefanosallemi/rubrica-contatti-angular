@@ -17,6 +17,10 @@ import { MessageModule } from 'primeng/message';
 import { AutoCompleteModule } from 'primeng/autocomplete';
 import { ToggleButtonModule } from 'primeng/togglebutton';
 import { RicercaComponent } from './ricerca/ricerca.component';
+import { EliminaAlertComponent } from './elimina-alert/elimina-alert.component';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { ToastModule } from 'primeng/toast';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -25,6 +29,7 @@ import { RicercaComponent } from './ricerca/ricerca.component';
     AggiungiContattoComponent,
     DettagliContattoComponent,
     RicercaComponent,
+    EliminaAlertComponent,
   ],
   imports: [
     BrowserModule,
@@ -37,7 +42,10 @@ import { RicercaComponent } from './ricerca/ricerca.component';
     FormsModule,
     MessageModule,
     AutoCompleteModule,
-    ToggleButtonModule
+    ToggleButtonModule,
+    ConfirmDialogModule,
+    ToastModule,
+    BrowserAnimationsModule,
   ],
 
   exports: [
@@ -50,7 +58,10 @@ import { RicercaComponent } from './ricerca/ricerca.component';
     FieldsetModule,
     CardModule,
     AutoCompleteModule,
-    ToggleButtonModule
+    ToggleButtonModule,
+    ConfirmDialogModule,
+    ToastModule,
+    BrowserAnimationsModule,
   ],
   providers: [ContattiService],
   bootstrap: [AppComponent]

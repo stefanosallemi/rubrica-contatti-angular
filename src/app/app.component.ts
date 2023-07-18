@@ -16,10 +16,14 @@ export class AppComponent {
   ordinaContattiPerNome() {
     if (!this.checked) {
       this.contattiService.ordinaContattiPerNome();
-      this.contattiService.effettuaRicerca(this.query);
     } else {
       window.location.reload();
     }
+  }
+  reload() {
+    setTimeout(() => {
+      window.location.reload();
+    }, 10);
   }
 
   effettuaRicerca(query: string) {

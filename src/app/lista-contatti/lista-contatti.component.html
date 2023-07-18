@@ -1,3 +1,4 @@
+<!-- lista-contatti.component.html -->
 <p-table [value]="contattiFiltrati || contatti" styleClass="p-datatable-striped" [tableStyle]="{ 'min-width': '50rem' }">
   <ng-template pTemplate="header">
     <tr>
@@ -13,8 +14,7 @@
       <td class="text-end align-right">
         <p-button class="edit-btn" icon="pi pi-user-edit" styleClass="p-button-warning p-button-rounded"
           [routerLink]="['/dettagli', contatto.id]"></p-button>
-        <p-button icon="pi pi-times" styleClass="p-button-danger p-button-rounded"
-          (click)="eliminaContatto(contatto.id)"></p-button>
+        <app-elimina-alert></app-elimina-alert>
       </td>
     </tr>
   </ng-template>

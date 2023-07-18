@@ -10,19 +10,11 @@ export class ContattiService {
   private ordinatoPerNome: boolean = false;
   contattiFiltrati: Contatto[] = [];
   
-  private query: string = '';
-
-  setQuery(query: string) {
-    this.query = query;
-  }
-
-  getQuery(): string {
-    return this.query;
-  }
 
   constructor(private router: Router) {
     this.caricaContattiSalvati();
     this.contattiFiltrati = this.contatti
+    
   }
 
   aggiungiContatto(contatto: Contatto): void {
@@ -53,7 +45,7 @@ export class ContattiService {
     this.router.navigate(
       ['/contatti'],
       { queryParams: { query: query } });
-    console.log('Eseguendo la ricerca con query:', query);
+      console.log('Eseguendo la ricerca con query:', query);
     return this.contatti.filter(contatto =>
       contatto.nome.toLowerCase().includes(query) ||
       contatto.cognome.toLowerCase().includes(query) ||

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ContattiService } from '../services/contatti.service';
 import { Contatto } from '../models/contatto.model';
 import { Router } from '@angular/router';
+import { delay } from 'rxjs';
 
 @Component({
   selector: 'app-ricerca',
@@ -19,5 +20,9 @@ export class RicercaComponent {
 
   effettuaRicerca() {
     this.contattiService.effettuaRicerca(this.query);
+
+    setTimeout(() => {
+      window.location.reload();
+    }, 10);
   }
 }

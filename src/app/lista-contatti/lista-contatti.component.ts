@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Contatto } from '../models/contatto.model';
 import { ContattiService } from '../services/contatti.service';
 import { ActivatedRoute } from '@angular/router';
+import { EliminaConfermaService } from '../services/elimina-conferma.service';
 
 @Component({
   selector: 'app-lista-contatti',
@@ -15,11 +16,20 @@ export class ListaContattiComponent implements OnInit {
   constructor(
     private contattiService: ContattiService,
     private route: ActivatedRoute,
+    private eliminaConfermaService: EliminaConfermaService
   ) { }
 
   ngOnInit() {
     this.caricaContatti();
 
+    this.eliminaConfermaService.confermaEliminazione$.subscribe(confermato => {
+      if (confermato) {
+        if (this.idContattoInEliminazione) {
+          this.eliminaContatto(this.idContattoInEliminazione);
+          this.idContattoInEliminazione = null;
+        }
+      }
+    });
   }
 
   caricaContatti() {
@@ -41,8 +51,10 @@ export class ListaContattiComponent implements OnInit {
     this.caricaContatti();
   }
 
-  ordinaContattiPerNome() {
-    this.contattiService.ordinaContattiPerNome();
-    this.caricaContatti();
+  idContattoInEliminazione: number | null = null;
+
+  mostraConfermaEliminazione(contatto: Contatto) {
+    this.idContattoInEliminazione = contatto.id;
+    this.eliminaConfermaService.confermaEliminazione(true);
   }
 }
