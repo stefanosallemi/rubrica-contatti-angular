@@ -20,8 +20,9 @@ export class EliminaAlertComponent {
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
         this.messageService.add({
-          severity: 'info',
-          summary: 'Contatto eliminato con successo!',
+          severity: 'success',
+          summary: 'Confermato',
+          detail: 'Contatto eliminato con successo'
         });
         this.contattiService.confermaEliminazione(true);
       },
@@ -29,14 +30,16 @@ export class EliminaAlertComponent {
         switch (type) {
           case ConfirmEventType.REJECT:
             this.messageService.add({
-              severity: 'error',
-              summary: 'Contatto non eliminato!',
+              severity: 'info',
+              summary: 'Annullato',
+              detail: 'Contatto non eliminato'
             });
             break;
           case ConfirmEventType.CANCEL:
             this.messageService.add({
               severity: 'warn',
-              summary: 'Contatto non eliminato!',
+              summary: 'Annullato',
+              detail: 'Contatto non eliminato'
             });
             break;
         }

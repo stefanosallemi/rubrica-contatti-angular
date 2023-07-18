@@ -16,6 +16,11 @@ export class ContattiService {
 
   confermaEliminazione(confermato: boolean) {
     this.confermaEliminazioneSource.next(confermato);
+    const index = this.contatti.findIndex(contatto => contatto.id);
+    if (index !== -1) {
+      this.contatti.splice(index, 1);
+      this.salvaContatti();
+    }
   }
 
   constructor(private router: Router) {
