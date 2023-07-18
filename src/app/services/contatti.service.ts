@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Contatto } from '../models/contatto.model';
 import { Router } from '@angular/router';
+import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -9,12 +10,18 @@ export class ContattiService {
   private contatti: Contatto[] = [];
   private ordinatoPerNome: boolean = false;
   contattiFiltrati: Contatto[] = [];
-  
+
+  private confermaEliminazioneSource = new Subject<boolean>();
+  confermaEliminazione$ = this.confermaEliminazioneSource.asObservable();
+
+  confermaEliminazione(confermato: boolean) {
+    this.confermaEliminazioneSource.next(confermato);
+  }
 
   constructor(private router: Router) {
     this.caricaContattiSalvati();
     this.contattiFiltrati = this.contatti
-    
+
   }
 
   aggiungiContatto(contatto: Contatto): void {
@@ -45,7 +52,7 @@ export class ContattiService {
     this.router.navigate(
       ['/contatti'],
       { queryParams: { query: query } });
-      console.log('Eseguendo la ricerca con query:', query);
+    console.log('Eseguendo la ricerca con query:', query);
     return this.contatti.filter(contatto =>
       contatto.nome.toLowerCase().includes(query) ||
       contatto.cognome.toLowerCase().includes(query) ||
@@ -79,6 +86,6 @@ export class ContattiService {
       contatto.nome.toLowerCase().includes(query) ||
       contatto.cognome.toLowerCase().includes(query) ||
       contatto.email.toLowerCase().includes(query)
-      )));
+    )));
   }
 }
