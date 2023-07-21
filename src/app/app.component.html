@@ -1,18 +1,18 @@
 <div class="container">
   <p-card class="card-content">
     <div class="center-text">
-      <h1>Rubrica Contatti </h1>
+      <h1 class="title">Rubrica Contatti </h1>
     </div>
     <div class="navbar">
-      <p-button styleClass="p-button-rounded" routerLink="/" (click)="reload()">Contatti</p-button>
+      <p-button styleClass="p-button-rounded p-button-primary" label="Contatti" icon="pi pi-users" routerLink="/" (click)="reload()"></p-button>
 
       <p-toggleButton styleClass="p-button-rounded" (click)="ordinaContattiPerNome()" [(ngModel)]="checked"
-        onLabel="Ordina" offLabel="Ordina" onIcon="pi pi-sort-alpha-down" offIcon="pi pi-sort-alpha-up"></p-toggleButton>
-      <!-- Add the app-ricerca component here -->
+        onLabel="Ordina" offLabel="Ordina" onIcon="pi pi-sort-alpha-down"
+        offIcon="pi pi-sort-alpha-up"></p-toggleButton>
 
       <app-ricerca></app-ricerca>
 
-      <p-button type="ngSubmit" styleClass="p-button-rounded p-button-success" label="Nuovo Contatto"
+      <p-button styleClass="p-button-rounded p-button-success" label="Nuovo Contatto"
         icon="pi pi-user-plus" routerLink="/aggiungi"></p-button>
     </div>
     <router-outlet></router-outlet>

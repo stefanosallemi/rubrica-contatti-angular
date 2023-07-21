@@ -8,7 +8,7 @@ import { AggiungiContattoComponent } from './aggiungi-contatto/aggiungi-contatto
 import { DettagliContattoComponent } from './dettagli-contatto/dettagli-contatto.component';
 import { TableModule } from 'primeng/table';
 import { InputTextModule } from 'primeng/inputtext';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
 import { FieldsetModule } from 'primeng/fieldset';
 import { CardModule } from 'primeng/card';
@@ -21,6 +21,10 @@ import { EliminaAlertComponent } from './elimina-alert/elimina-alert.component';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ToastModule } from 'primeng/toast';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NotFoundComponent } from './not-found/not-found.component';
+import { TooltipModule } from 'primeng/tooltip';
+import { DragDropModule } from 'primeng/dragdrop';
+import { OrderListModule } from 'primeng/orderlist';
 
 @NgModule({
   declarations: [
@@ -30,6 +34,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     DettagliContattoComponent,
     RicercaComponent,
     EliminaAlertComponent,
+    NotFoundComponent,
   ],
   imports: [
     BrowserModule,
@@ -46,6 +51,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     ConfirmDialogModule,
     ToastModule,
     BrowserAnimationsModule,
+    TooltipModule,
+    ReactiveFormsModule,
+    DragDropModule,
+    OrderListModule,
+
   ],
 
   exports: [
@@ -62,6 +72,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     ConfirmDialogModule,
     ToastModule,
     BrowserAnimationsModule,
+    TooltipModule,
+    ReactiveFormsModule,
+    DragDropModule,
+    OrderListModule,
+    
   ],
   providers: [ContattiService],
   bootstrap: [AppComponent]

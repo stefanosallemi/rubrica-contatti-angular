@@ -1,11 +1,13 @@
 <p-toast></p-toast>
-    <p-confirmDialog #cd [style]="{width: '50vw'}">
-        <ng-template pTemplate="header">
-            <h3>Conferma Eliminazione</h3>
-        </ng-template>
-        <ng-template pTemplate="footer">
-            <p-button type="button" icon="pi pi-times" styleClass="p-button-secondary p-button-rounded" label="No" (click)="cd.reject()"></p-button>
-            <p-button type="button" icon="pi pi-check" styleClass="p-button-danger p-button-rounded" label="Yes" (click)="cd.accept()"></p-button>
-        </ng-template>
-    </p-confirmDialog>
-<p-button icon="pi pi-times" styleClass="p-button-danger p-button-rounded" (click)="confermaEliminazione()" ></p-button>
+<p-confirmDialog #cd [style]="{width: '50vw'}">
+    <ng-template pTemplate="header">
+        <h3>Conferma Eliminazione</h3>
+    </ng-template>
+    <ng-template pTemplate="footer">
+        <p-button type="button" icon="pi pi-times" styleClass="p-button-secondary p-button-rounded" label="No"
+            (click)="cd.reject()"></p-button>
+        <p-button type="button" icon="pi pi-check" styleClass="p-button-danger p-button-rounded" label="Yes"
+            (click)="cd.accept()"></p-button>
+    </ng-template>
+</p-confirmDialog>
+<p-button icon="pi pi-times" styleClass="p-button-danger p-button-rounded" (click)="confermaEliminazione()"></p-button>

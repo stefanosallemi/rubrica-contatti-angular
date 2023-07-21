@@ -28,6 +28,6 @@ export class AppComponent {
 
   effettuaRicerca(query: string) {
     this.query = query;
-    this.contattiService.effettuaRicerca(this.query);
+    /* this.contattiService.effettuaRicerca(this.query); */
   }
 }

@@ -1,20 +1,53 @@
-import { Validators } from "@angular/forms";
+// validators.ts
+import { AbstractControl, ValidatorFn, Validators } from '@angular/forms';
 
-export const nomeValidator = Validators.compose([
-    Validators.required,
-    Validators.minLength(2),
-    Validators.maxLength(20),
-    Validators.pattern(/^[A-Za-z]+$/),
-]);
+export function nomeValidator(): ValidatorFn {
+  return (control: AbstractControl): { [key: string]: any } | null => {
+    const value = control.value;
+    if (!value) {
+      return { required: { message: 'Nome è richiesto' } };
+    }
+    if (value.length < 2) {
+      return { minlength: { message: 'Nome deve contenere almeno 2 caratteri' } };
+    }
+    if (value.length > 20) {
+      return { maxlength: { message: 'Nome non può superare i 20 caratteri' } };
+    }
+    if (!/^[A-Za-z ]*$/.test(value)) {
+      return { pattern: { message: 'Nome può contenere solo lettere' } };
+    }
+    return null;
+  };
+}
 
-export const cognomeValidator = Validators.compose([
-    Validators.required,
-    Validators.minLength(2),
-    Validators.maxLength(20),
-    Validators.pattern(/^[A-Za-z]+$/),
-]);
+export function cognomeValidator(): ValidatorFn {
+  return (control: AbstractControl): { [key: string]: any } | null => {
+    const value = control.value;
+    if (!value) {
+      return { required: { message: 'Cognome è richiesto' } };
+    }
+    if (value.length < 2) {
+      return { minlength: { message: 'Cognome deve contenere almeno 2 caratteri' } };
+    }
+    if (value.length > 20) {
+      return { maxlength: { message: 'Cognome non può superare i 20 caratteri' } };
+    }
+    if (!/^[A-Za-z ]*$/.test(value)) {
+      return { pattern: { message: 'Cognome può contenere solo lettere' } };
+    }
+    return null;
+  };
+}
 
-export const emailValidator = Validators.compose([
-    Validators.required,
-    Validators.email,
-]);
+export function emailValidator(): ValidatorFn {
+  return (control: AbstractControl): { [key: string]: any } | null => {
+    const value = control.value;
+    if (!value) {
+      return { required: { message: 'Email è richiesta' } };
+    }
+    if (!Validators.email(control)) {
+      return { email: { message: 'Email non è valida' } };
+    }
+    return null;
+  };
+}

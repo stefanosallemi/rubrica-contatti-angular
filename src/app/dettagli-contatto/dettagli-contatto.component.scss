@@ -2,6 +2,20 @@
     margin-right: 0.5rem;
 }
 
-.align-right{
-    width: 10rem;
+.align-right {
+    text-align: right;
+}
+
+.azioni {
+    text-align: right;
+    margin-right: 1rem;
+}
+
+.fix-width-th{
+    width: 207px !important;
+    margin-left: 1rem !important;
+}
+
+.fix-width-div{
+    width: 207px !important;
 }

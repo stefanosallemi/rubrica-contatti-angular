@@ -3,7 +3,6 @@ import { NgForm } from '@angular/forms';
 import { Contatto } from '../models/contatto.model';
 import { ContattiService } from '../services/contatti.service';
 import { Router } from '@angular/router';
-import { nomeValidator, cognomeValidator, emailValidator } from '../validators/custom-validators';
 
 @Component({
   selector: 'app-aggiungi-contatto',
@@ -19,15 +18,9 @@ export class AggiungiContattoComponent {
   };
 
   @Output() contattoAggiunto = new EventEmitter<Contatto>();
-  @ViewChild('contattoForm') contattoForm!: NgForm;
+  @ViewChild('contattoForm') contattoForm: NgForm;
 
-  constructor(private contattiService: ContattiService, private router: Router) {}
-
-  ngOnInit() {
-    this.contattoForm.form.get('nome')?.setValidators([nomeValidator!]);
-    this.contattoForm.form.get('cognome')?.setValidators([cognomeValidator!]);
-    this.contattoForm.form.get('email')?.setValidators([emailValidator!]);
-  }
+  constructor(private contattiService: ContattiService, private router: Router) { }
 
   salvaContatto() {
     if (this.contattoForm.valid) {
@@ -44,5 +37,5 @@ export class AggiungiContattoComponent {
     } else {
       console.log('Contatto non salvato');
     }
-  } 
+  }
 }

@@ -3,6 +3,7 @@
 @import "primeng/resources/themes/lara-light-blue/theme.css";
 @import "primeng/resources/primeng.css";
 @import "primeicons/primeicons.css";
+@import url('https://fonts.googleapis.com/css2?family=Inter+Tight:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
 /* width */
 ::-webkit-scrollbar {
@@ -33,4 +34,51 @@ body {
 
 .full-radius {
     border-radius: 5rem;
+}
+
+* {
+    font-family: 'Inter Tight', sans-serif;
+    letter-spacing: 0.3px;
+    font-size: 100%;
+}
+
+@media (max-width: 425px) {
+    * {
+        font-size: 95%;
+    }
+}
+
+.p-card {
+    border-radius: 2rem;
+}
+
+.p-dialog-header,
+.p-orderlist-header {
+    border-top-left-radius: 1.5rem !important;
+    border-top-right-radius: 1.5rem !important;
+}
+
+.p-dialog-footer,
+.p-orderlist-list {
+    border-bottom-left-radius: 1.5rem !important;
+    border-bottom-right-radius: 1.5rem !important;
+}
+
+.p-dialog {
+    background-color: transparent !important;
+    box-shadow: none !important;
+}
+
+.p-orderlist-controls {
+    display: none !important;
+}
+
+.align-left {
+    text-align: left !important;
+    display: flex;
+    align-items: center;
+}
+
+div.p-card-body {
+    padding-bottom: 0rem !important;
 }

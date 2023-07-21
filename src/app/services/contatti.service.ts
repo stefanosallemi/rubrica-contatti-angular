@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
 import { Contatto } from '../models/contatto.model';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { Router } from '@angular/router';
-import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ContattiService {
   private contatti: Contatto[] = [];
+  contattiSubject: BehaviorSubject<Contatto[]> = new BehaviorSubject<Contatto[]>([]);
   private ordinatoPerNome: boolean = false;
   contattiFiltrati: Contatto[] = [];
 
@@ -25,13 +26,20 @@ export class ContattiService {
 
   constructor(private router: Router) {
     this.caricaContattiSalvati();
-    this.contattiFiltrati = this.contatti
-
+    this.contattiSubject.next(this.contatti);
   }
 
   aggiungiContatto(contatto: Contatto): void {
-    contatto.id = this.generaNuovoId();
-    this.contatti.push(contatto);
+    if (contatto.id) {
+      const index = this.contatti.findIndex(c => c.id === contatto.id);
+      if (index !== -1) {
+        this.contatti[index] = contatto;
+      }
+    } else {
+      contatto.id = this.generaNuovoId();
+      this.contatti.push(contatto);
+    }
+
     this.salvaContatti();
   }
 
@@ -40,11 +48,16 @@ export class ContattiService {
     if (index !== -1) {
       this.contatti.splice(index, 1);
       this.salvaContatti();
+      this.contattiSubject.next(this.contatti);
     }
   }
 
   ottieniContatti(): Contatto[] {
-    return this.ordinatoPerNome ? this.contatti.sort((a, b) => (a.nome || '').localeCompare(b.nome || '')) : this.contatti;
+    return this.contatti;
+  }
+
+  getContattiObservable(): Observable<Contatto[]> {
+    return this.contattiSubject.asObservable();
   }
 
   ordinaContattiPerNome(): void {
@@ -58,12 +71,17 @@ export class ContattiService {
       ['/contatti'],
       { queryParams: { query: query } });
     console.log('Eseguendo la ricerca con query:', query);
-    return this.contatti.filter(contatto =>
+  
+    this.contattiFiltrati = this.contatti.filter(contatto =>
       contatto.nome.toLowerCase().includes(query) ||
       contatto.cognome.toLowerCase().includes(query) ||
       contatto.email.toLowerCase().includes(query)
     );
+    this.contattiSubject.next(this.contattiFiltrati);
+    return this.contattiFiltrati;
+    
   }
+  
 
   private generaNuovoId(): number {
     return this.contatti.length > 0 ? Math.max(...this.contatti.map(contatto => contatto.id)) + 1 : 1;
@@ -78,19 +96,5 @@ export class ContattiService {
     if (contattiSalvati) {
       this.contatti = JSON.parse(contattiSalvati);
     }
-  }
-
-  effettuaRicerca(query: string) {
-    query = query.toLowerCase();
-    this.router.navigate(
-      ['/contatti'],
-      { queryParams: { query: query } }
-    );
-    console.log('Eseguendo la ricerca con query:', query);
-    return localStorage.setItem('contattiFiltrati', JSON.stringify(this.contattiFiltrati = this.contatti.filter(contatto =>
-      contatto.nome.toLowerCase().includes(query) ||
-      contatto.cognome.toLowerCase().includes(query) ||
-      contatto.email.toLowerCase().includes(query)
-    )));
   }
 }

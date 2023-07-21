@@ -19,36 +19,32 @@ export class ListaContattiComponent implements OnInit {
 
   ngOnInit() {
     this.caricaContatti();
-
-    this.contattiService.confermaEliminazione$.subscribe(confermato => {
-      if (confermato) {
-        this.eliminaContatto(this.idContattoInEliminazione)
-        if (this.idContattoInEliminazione) {
-          this.eliminaContatto(this.idContattoInEliminazione);
-          this.idContattoInEliminazione = null;
-        }
-      }
-    });
   }
 
   caricaContatti() {
-    this.contatti = this.contattiService.ottieniContatti();
+    this.contattiService.getContattiObservable().subscribe(contatti => {
+      this.contatti = contatti;
+      this.filtraContatti();
+    });
 
     const queryParam = this.route.snapshot.queryParamMap.get('query');
-
     if (queryParam) {
-      this.contattiFiltrati = this.contatti.filter(contatto =>
-        contatto.nome.toLowerCase().includes(queryParam.toLowerCase())
-      );
+      this.filtraContatti(queryParam.toLowerCase());
+    }
+  }
+  filtraContatti(query?: string) {
+    if (query) {
+      this.contattiFiltrati = this.contattiService.ricercaContatti(query);
     } else {
       this.contattiFiltrati = this.contatti;
     }
   }
+  
 
   eliminaContatto(id: number) {
     this.contattiService.eliminaContatto(id);
-    this.caricaContatti();
   }
+
 
   idContattoInEliminazione: number | null = null;
 
@@ -56,4 +52,26 @@ export class ListaContattiComponent implements OnInit {
     this.idContattoInEliminazione = contatto.id;
     this.contattiService.confermaEliminazione(true);
   }
+
+  /* salvaPosizionamento(event: any) {
+    this.contattiOrdine = event.value.map((contatto: Contatto) => contatto.id);
+
+    this.contattiFiltrati.sort((a: Contatto, b: Contatto) => {
+      const nomeA = a.nome.toLowerCase();
+      const nomeB = b.nome.toLowerCase();
+      return nomeA.localeCompare(nomeB);
+    });
+
+    localStorage.setItem('contattiOrdine', JSON.stringify(this.contattiOrdine));
+  }
+
+  riordinaContatti() {
+    if (this.contattiOrdine.length > 0) {
+      this.contattiFiltrati.sort((a: Contatto, b: Contatto) => {
+        const indexA = this.contattiOrdine.indexOf(a.id);
+        const indexB = this.contattiOrdine.indexOf(b.id);
+        return indexA - indexB;
+      });
+    }
+  } */
 }
